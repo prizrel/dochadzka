@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Форма учёта</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 4px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        h2 {
+            margin-top: 20px;
+        }
+        .kovtoniuk {
+            margin-left: 15px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Добавить запись</h2>
+<form th:action="@{/save}" th:object="${tabulka}" method="post">
+    Дата: <input type="date" th:field="*{datum}" required/><br/>
+    Город: <input type="text" th:field="*{miesto}" required/><br/>
+    Время от: <input type="time" th:field="*{od}" /><br/>
+    Время до: <input type="time" th:field="*{doTime}" /><br/>
+    <button type="submit">Сохранить</button>
+</form>
+
+<hr/>
+
+<h2 class="kovtoniuk">Kovtoniuk</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>Dátum</th>
+        <th>Miesto</th>
+        <th>od</th>
+        <th>do</th>
+        <th>Spolu hod.</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="t : ${tabulkaList}">
+        <td th:text="${t.datum != null} ? ${t.datum} : '-'"></td>
+        <td th:text="${t.miesto != null} ? ${t.miesto} : '-'"></td>
+        <td th:text="${t.od != null} ? ${t.od} : '-'"></td>
+        <td th:text="${t.doTime != null} ? ${t.doTime} : '-'"></td>
+        <td th:text="${t.spolu_hod != null} ? ${t.spolu_hod} : '-'"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
